@@ -100,6 +100,7 @@ class SignupPage extends StatelessWidget {
 
                     child: ElevatedButton(
                       onPressed: () {
+                        _showAlertDialog(context);
                       },
                       child: const Text(
                         "Sign up",
@@ -132,6 +133,25 @@ class SignupPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+  void _showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('STATUS'),
+          content: Text('Your New Account Created'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

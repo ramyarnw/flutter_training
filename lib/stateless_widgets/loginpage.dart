@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                   borderSide: BorderSide.none
               ),
-              fillColor: Colors.greenAccent.withOpacity(0.2),
+              fillColor: Colors.greenAccent.withOpacity(0.5),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
         ),
@@ -79,7 +79,7 @@ class LoginPage extends StatelessWidget {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
-            fillColor: Colors.greenAccent.withOpacity(0.2),
+            fillColor: Colors.greenAccent.withOpacity(0.5),
             filled: true,
             prefixIcon: const Icon(Icons.password),
           ),
@@ -88,7 +88,7 @@ class LoginPage extends StatelessWidget {
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
-
+            _showAlertDialog(context);
           },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
@@ -132,5 +132,24 @@ class LoginPage extends StatelessWidget {
       ],
     );
 
+  }
+  void _showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('STATUS'),
+          content: Text('login Success'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
