@@ -7,9 +7,28 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return Stack( // <-- STACK AS THE SCAFFOLD PARENT
+        children: [
+    Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    decoration: BoxDecoration(
+    image: DecorationImage(
+    image: AssetImage("assets/images/bgimage.jpg"), // <-- BACKGROUND IMAGE
+    fit: BoxFit.cover,
+    ),
+    ),
+    ),
+      MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+            title: const Text('Login Page',style: TextStyle(color: Colors.white,fontSize: 25,
+              fontStyle: FontStyle.italic,
+            ),),
+            backgroundColor: Colors.transparent
+        ),
         body: Container(
           margin: const EdgeInsets.all(24),
           child: Column(
@@ -22,8 +41,8 @@ class LoginPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+    )
+    )]);
   }
 
   _header(context) {
@@ -112,5 +131,6 @@ class LoginPage extends StatelessWidget {
         )
       ],
     );
+
   }
 }
