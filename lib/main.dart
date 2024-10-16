@@ -94,11 +94,23 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.Home),
 
+
       ),
       body: Container(
         child: Column(
           children: [
-            Text('welcome to our page'),
+            Text('welcome to our page', style: TextStyle(color: Colors.green),),
+            ElevatedButton(
+              child: const Text("Login Page", style: TextStyle(color: Colors.blue),),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+
+              },
+
+            ),
             ElevatedButton(onPressed: (){}, child: Text('schedule'),),
             ElevatedButton(onPressed: (){}, child: Text('duration'),),
           ],

@@ -32,6 +32,7 @@ class TextFormFieldExample extends StatefulWidget {
 class _TextFormFieldExampleState extends State<TextFormFieldExample> {
   final TextEditingController controller = TextEditingController();
   final TextEditingController controller1 = TextEditingController();
+  final TextEditingController controller2 = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String? forceErrorText;
   bool isLoading = false;
@@ -60,9 +61,16 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
     return null;
   }
 
-  /*String? validateMobile(String value) {
+  String? validateMobile(String? value) {
     const pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-    RegExp regExp = new RegExp(pattern);
+    final regex = RegExp(pattern);
+
+    return value!.isNotEmpty && !regex.hasMatch(value)
+        ? 'Enter mobile number'
+        : null;
+  }
+
+  /*RegExp regExp = new RegExp(pattern);
     if (value.length == 0) {
       return 'Please enter mobile number';
     }
@@ -70,8 +78,8 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
       return 'Please enter valid mobile number';
     }
     return null;
-  }
-*/
+  }*/
+
   String? validateEmail(String? value) {
     const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
         r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
@@ -122,11 +130,14 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FORM', style: TextStyle(color: Colors.pink, fontSize: 30
+        title: Text('FORM VALIDATION', style: TextStyle(color: Colors.pink, fontSize: 30
         ),
         ),
       ),
-      body: Padding(
+
+      body: Container(
+
+      child:Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Center(
           child: Form(
@@ -143,15 +154,15 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
                   validator: validator,
                   onChanged: onChanged,
                 ),
-                /*TextFormField(
+                TextFormField(
                   forceErrorText: forceErrorText,
-                  controller: controller,
+                  controller: controller2,
                   decoration: const InputDecoration(
                     hintText: 'Enter password',
                   ),
                   validator: validateMobile,
                   onChanged: onChanged,
-                ),*/
+                ),
                 TextFormField(
                   forceErrorText: forceErrorText,
                   controller: controller1,
@@ -187,7 +198,7 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
 
