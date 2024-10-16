@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_training/stateful_widget/colorchange.dart';
 import 'package:flutter_training/stateful_widget/form.dart';
+import 'package:flutter_training/stateful_widget/formvalidation.dart';
 import 'package:flutter_training/stateless_widgets/colors.dart';
 import 'package:flutter_training/stateless_widgets/loginpage.dart';
 import 'package:flutter_training/stateless_widgets/signuppage.dart';
@@ -37,14 +38,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  LoginPage(),
+      home:  TextFormFieldExample(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.Home});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -55,7 +56,7 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final String Home;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -91,13 +92,15 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.Home),
+
       ),
       body: Container(
         child: Column(
           children: [
-            Text('hgjh'),
-            ElevatedButton(onPressed: (){}, child: Text('fccgf'),),
+            Text('welcome to our page'),
+            ElevatedButton(onPressed: (){}, child: Text('schedule'),),
+            ElevatedButton(onPressed: (){}, child: Text('duration'),),
           ],
         ),
       ),

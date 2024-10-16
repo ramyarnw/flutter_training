@@ -19,9 +19,10 @@ class LoginPage extends StatelessWidget {
     ),
     ),
     ),
-      MaterialApp(
+      /*MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home: */
+    Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
             title: const Text('Login Page',style: TextStyle(color: Colors.white,fontSize: 25,
@@ -42,10 +43,10 @@ class LoginPage extends StatelessWidget {
           ),
         ),
     )
-    )]);
+    ]);
   }
 
-  _header(context) {
+  Column _header(context) {
     return const Column(
       children: [
         Text(
@@ -57,7 +58,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _inputField(context) {
+  Column _inputField(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

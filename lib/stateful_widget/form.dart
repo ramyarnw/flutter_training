@@ -1,5 +1,7 @@
-/*import 'package:flutter/material.dart';
+/*import 'dart:async';
 
+import 'package:flutter/material.dart';
+//import 'package:form_field_validator/form_field_validator.dart';
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
 
@@ -9,6 +11,7 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +19,9 @@ class _LoginFormState extends State<LoginForm> {
         title: Text('FORM', style: TextStyle(color: Colors.pink, fontSize: 30
       ),
     )),
-      key:_formKey,
-          body:Container(
 
+          body:Form(
+              key:_formKey,
           child:Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:<Widget>
@@ -68,11 +71,11 @@ class _LoginFormState extends State<LoginForm> {
                     child: const Text('Submit'),
                     onPressed: () {
                   // It returns true if the form is valid, otherwise returns false
-                  if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a Snack bar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Data is in processing.')));
-                  }
+                      if (_formKey.currentState.validate()) {
+                        print("Validated");
+                      }else{
+                        print("Not Validated");
+                      }
                   },
                   )),
 
@@ -83,9 +86,6 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
-extension on ScaffoldState {
-  void showSnackBar(SnackBar snackBar) {}
-}
-
-
 */
+
+

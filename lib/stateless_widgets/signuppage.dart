@@ -5,9 +5,11 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return
+      /*MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home:*/
+      Scaffold(
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -132,7 +134,7 @@ class SignupPage extends StatelessWidget {
             ),
           ),
         ),
-      ),
+
     );
   }
   void _showAlertDialog(BuildContext context) {
