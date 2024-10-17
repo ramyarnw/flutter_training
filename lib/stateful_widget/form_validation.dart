@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_training/main.dart';
-import 'package:flutter_training/stateful_widget/homepage.dart';
+import 'package:flutter_training/stateful_widget/home_page.dart';
+import 'package:flutter_training/stateful_widget/page_view.dart';
 
 /// Flutter code sample for [TextFormField].
 
@@ -20,7 +21,6 @@ class TextFormFieldExampleApp extends StatelessWidget {
   }
 }
 */
-
 
 class TextFormFieldExample extends StatefulWidget {
   const TextFormFieldExample({super.key});
@@ -47,9 +47,7 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
     if (value == null || value.isEmpty) {
       return 'This field is required';
     }
-    if (value.length != value
-        .replaceAll(' ', '')
-        .length) {
+    if (value.length != value.replaceAll(' ', '').length) {
       return 'Username must not contain any spaces';
     }
     if (int.tryParse(value[0]) != null) {
@@ -129,89 +127,99 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('FORM VALIDATION', style: TextStyle(color: Colors.pink, fontSize: 30
-        ),
-        ),
-      ),
-
-      body: Container(
-
-      child:Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Center(
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextFormField(
-                  forceErrorText: forceErrorText,
-                  controller: controller,
-                  decoration: const InputDecoration(
-                    hintText: 'Please write a username',
-                  ),
-                  validator: validator,
-                  onChanged: onChanged,
-                ),
-                TextFormField(
-                  forceErrorText: forceErrorText,
-                  controller: controller2,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter password',
-                  ),
-                  validator: validateMobile,
-                  onChanged: onChanged,
-                ),
-                TextFormField(
-                  forceErrorText: forceErrorText,
-                  controller: controller1,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter email ID in lowercase letters',
-                  ),
-                  validator: validateEmail,
-                  onChanged: onChanged,
-                ),
-                const SizedBox(height: 40.0),
-                if (isLoading)
-                  const CircularProgressIndicator()
-                else
-                  TextButton(
-                    onPressed: onSave,
-                    
-                    child: const Text('Save'),
-                  ),
-
-                ElevatedButton(
-                  child: const Text("Go to Homepage", style: TextStyle(color: Colors.blue),),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyHomePage(Home: 'Home')),
-                    );
-
-                  },
-
-                )
-              ],
-            ),
+        appBar: AppBar(
+          title: Text(
+            'FORM VALIDATION',
+            style: TextStyle(color: Colors.pink, fontSize: 30),
           ),
         ),
-      ),
-    ));
+        body: Container(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Center(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    TextFormField(
+                      forceErrorText: forceErrorText,
+                      controller: controller,
+                      decoration: const InputDecoration(
+                        hintText: 'Please write a username',
+                      ),
+                      validator: validator,
+                      onChanged: onChanged,
+                    ),
+                    TextFormField(
+                      forceErrorText: forceErrorText,
+                      controller: controller2,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter password',
+                      ),
+                      validator: validateMobile,
+                      onChanged: onChanged,
+                    ),
+                    TextFormField(
+                      forceErrorText: forceErrorText,
+                      controller: controller1,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter email ID in lowercase letters',
+                      ),
+                      validator: validateEmail,
+                      onChanged: onChanged,
+                    ),
+                    const SizedBox(height: 40.0),
+                    if (isLoading)
+                      const CircularProgressIndicator()
+                    else
+                      TextButton(
+                        onPressed: onSave,
+                        child: const Text('Save'),
+                      ),
+                    ElevatedButton(
+                      child: const Text(
+                        "Go to Homepage",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyHomePage(Home: 'Home')),
+                        );
+                      },
+                    ),
+                    ElevatedButton(
+                      child: const Text(
+                        "Continue -> PageView",
+                        style: TextStyle(color: Colors.purple),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PageView1()),
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ));
   }
 }
 
-  Future<String?> validateUsernameFromServer(String username) async {
-    final Set<String> takenUsernames = <String>{'siva', 'ram'};
+Future<String?> validateUsernameFromServer(String username) async {
+  final Set<String> takenUsernames = <String>{'siva', 'ram'};
 
+  await Future<void>.delayed(kFakeHttpRequestDuration);
 
-    await Future<void>.delayed(kFakeHttpRequestDuration);
-
-    final bool isValid = !takenUsernames.contains(username);
-    if (isValid) {
-      return null;
-    }
-
-    return 'Username $username is already taken';
+  final bool isValid = !takenUsernames.contains(username);
+  if (isValid) {
+    return null;
   }
+
+  return 'Username $username is already taken';
+}

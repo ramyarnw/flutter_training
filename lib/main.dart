@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/stateful_widget/colorchange.dart';
+import 'package:flutter_training/stateful_widget/color_change.dart';
 import 'package:flutter_training/stateful_widget/form.dart';
-import 'package:flutter_training/stateful_widget/formvalidation.dart';
+import 'package:flutter_training/stateful_widget/form_validation.dart';
 import 'package:flutter_training/stateless_widgets/colors.dart';
-import 'package:flutter_training/stateless_widgets/loginpage.dart';
-import 'package:flutter_training/stateless_widgets/signuppage.dart';
+import 'package:flutter_training/stateless_widgets/login_page.dart';
+import 'package:flutter_training/stateless_widgets/signup_page.dart';
 import 'package:flutter_training/stateless_widgets/user_details.dart';
 
 void main() {
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  TextFormFieldExample(),
+      home: TextFormFieldExample(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -93,26 +93,34 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.Home),
-
-
       ),
       body: Container(
         child: Column(
           children: [
-            Text('welcome to our page', style: TextStyle(color: Colors.green),),
+            Text(
+              'welcome to our page',
+              style: TextStyle(color: Colors.green),
+            ),
             ElevatedButton(
-              child: const Text("Login Page", style: TextStyle(color: Colors.blue),),
+              child: const Text(
+                "Login Page",
+                style: TextStyle(color: Colors.blue),
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
-
               },
-
             ),
-            ElevatedButton(onPressed: (){}, child: Text('schedule'),),
-            ElevatedButton(onPressed: (){}, child: Text('duration'),),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('schedule'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('duration'),
+            ),
           ],
         ),
       ),

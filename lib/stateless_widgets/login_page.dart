@@ -1,48 +1,53 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_training/stateless_widgets/signuppage.dart';
+import 'package:flutter_training/stateful_widget/page_view.dart';
+import 'package:flutter_training/stateless_widgets/signup_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack( // <-- STACK AS THE SCAFFOLD PARENT
+    return Stack(// <-- STACK AS THE SCAFFOLD PARENT
         children: [
-    Container(
-    width: MediaQuery.of(context).size.width,
-    height: MediaQuery.of(context).size.height,
-    decoration: BoxDecoration(
-    image: DecorationImage(
-    image: AssetImage("assets/images/bgimage.jpg"), // <-- BACKGROUND IMAGE
-    fit: BoxFit.cover,
-    ),
-    ),
-    ),
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bgimage.jpg"),
+            // <-- BACKGROUND IMAGE
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
       /*MaterialApp(
       debugShowCheckedModeBanner: false,
       home: */
-    Scaffold(
+      Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-            title: const Text('Login Page',style: TextStyle(color: Colors.white,fontSize: 25,
-              fontStyle: FontStyle.italic,
-            ),),
-            backgroundColor: Colors.transparent
-        ),
+            title: const Text(
+              'Login Page',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            backgroundColor: Colors.transparent),
         body: Container(
           margin: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _header(context),
+              _header(context),//private function
               _inputField(context),
               _forgotPassword(context),
               _signup(context),
             ],
           ),
         ),
-    )
+      )
     ]);
   }
 
@@ -50,8 +55,8 @@ class LoginPage extends StatelessWidget {
     return const Column(
       children: [
         Text(
-          'Welcome to NATIVEWIT TECH Page'
-          ,style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          'Welcome to NATIVEWIT TECH Page',
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
         Text("Enter your details to login"),
       ],
@@ -67,8 +72,7 @@ class LoginPage extends StatelessWidget {
               hintText: "Username",
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none
-              ),
+                  borderSide: BorderSide.none),
               fillColor: Colors.greenAccent.withOpacity(0.5),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
@@ -105,35 +109,37 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _forgotPassword(context) {
+  TextButton _forgotPassword(context) {
     return TextButton(
       onPressed: () {},
-      child: const Text("Forgot password?",
+      child: const Text(
+        "Forgot password?",
         style: TextStyle(color: Colors.purple),
       ),
     );
   }
 
-  _signup(context) {
+  Row _signup(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text("Dont have an account? "),
         TextButton(
-        child: const Text("Sign Up", style: TextStyle(color: Colors.blue),),
-            onPressed: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const SignupPage()),
-    );
-
-            },
-
+          child: const Text(
+            "Sign Up",
+            style: TextStyle(color: Colors.blue),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SignupPage()),
+            );
+          },
         )
       ],
     );
-
   }
+
   void _showAlertDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -144,7 +150,11 @@ class LoginPage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PageView1()),
+                );
+                //Navigator.of(context).pop();
               },
               child: Text('OK'),
             ),
