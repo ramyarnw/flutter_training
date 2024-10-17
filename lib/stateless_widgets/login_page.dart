@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_training/stateful_widget/page_view.dart';
 import 'package:flutter_training/stateless_widgets/signup_page.dart';
+import 'package:flutter_training/widget/text_form_field.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -8,11 +9,11 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(// <-- STACK AS THE SCAFFOLD PARENT
-        children: [
+        children: <Widget>[
       Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/bgimage.jpg"),
             // <-- BACKGROUND IMAGE
@@ -51,25 +52,26 @@ class LoginPage extends StatelessWidget {
     ]);
   }
 
-  Column _header(context) {
+  Column _header(BuildContext context) {
     return const Column(
       children: [
         Text(
           'Welcome to NATIVEWIT TECH Page',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
-        Text("Enter your details to login"),
+        Text('Enter your details to login'),
       ],
     );
   }
 
-  Column _inputField(context) {
+  Column _inputField(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+
         TextField(
           decoration: InputDecoration(
-              hintText: "Username",
+              hintText: 'Username',
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
                   borderSide: BorderSide.none),
@@ -80,7 +82,7 @@ class LoginPage extends StatelessWidget {
         const SizedBox(height: 10),
         TextField(
           decoration: InputDecoration(
-            hintText: "Password",
+            hintText: 'Password',
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
@@ -101,7 +103,7 @@ class LoginPage extends StatelessWidget {
             backgroundColor: Colors.greenAccent,
           ),
           child: const Text(
-            "Login",
+            'Login',
             style: TextStyle(fontSize: 20),
           ),
         )
@@ -109,30 +111,30 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  TextButton _forgotPassword(context) {
+  TextButton _forgotPassword(BuildContext context) {
     return TextButton(
       onPressed: () {},
       child: const Text(
-        "Forgot password?",
+        'Forgot password?',
         style: TextStyle(color: Colors.purple),
       ),
     );
   }
 
-  Row _signup(context) {
+  Row _signup(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Dont have an account? "),
+        const Text('Dont have an account? '),
         TextButton(
           child: const Text(
-            "Sign Up",
+            'Sign Up',
             style: TextStyle(color: Colors.blue),
           ),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const SignupPage()),
+              MaterialPageRoute(builder: (BuildContext context) => const SignupPage()),
             );
           },
         )

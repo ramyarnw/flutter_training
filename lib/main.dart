@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_training/stateful_widget/color_change.dart';
 import 'package:flutter_training/stateful_widget/form.dart';
-import 'package:flutter_training/stateful_widget/form_validation.dart';
-import 'package:flutter_training/stateless_widgets/colors.dart';
+import 'stateful_widget/form_validation.dart';
+import 'stateless_widgets/colors.dart';
 import 'package:flutter_training/stateless_widgets/login_page.dart';
 import 'package:flutter_training/stateless_widgets/signup_page.dart';
 import 'package:flutter_training/stateless_widgets/user_details.dart';
