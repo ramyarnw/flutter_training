@@ -7,7 +7,7 @@ class AppTextFormField extends StatelessWidget {
     this.iconColor,
     this.obscure = false,
     this.forceErrorText,
-    this.validator, required this.controller, required this.onChanged,
+    this.validator, required this.controller,  this.onChanged,
   });
 
   final String hintText;
@@ -16,12 +16,12 @@ class AppTextFormField extends StatelessWidget {
   final String? forceErrorText;
   final String? Function(String?)? validator;
   final String? Function(String?)? onChanged;
-
 final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
 
     return TextFormField(
+
       obscureText: obscure,
       forceErrorText: forceErrorText,
      validator: validator,
@@ -42,3 +42,5 @@ final TextEditingController controller;
     );
   }
 }
+
+

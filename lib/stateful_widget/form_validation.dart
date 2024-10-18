@@ -138,25 +138,19 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
                        AppTextFormField(
                         hintText: 'UserName',
                         validator: validateUserName,
-                         controller: controllerUserName, onChanged: ( String ) {
-                           return null;
-                           },
+                         controller: controllerUserName,
                       ),
                       AppTextFormField(
                         hintText: 'mobile number',
                         iconColor: Colors.red,
                         validator: validateMobile,
-                        controller: controllerMobile, onChanged: (String ) {
-                          return null;
-                          },
+                        controller: controllerMobile,
                       ),
                       AppTextFormField(
                         hintText: 'emailId',
                         //obscure: true,
                         validator: validateEmail,
-                        controller: controllerEmail, onChanged: (String ) {
-                          return null;
-                          },
+                        controller: controllerEmail,
                       ),
                       // TextFormField(
                       //   forceErrorText: forceErrorText,

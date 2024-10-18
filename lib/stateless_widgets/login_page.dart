@@ -3,6 +3,8 @@ import 'package:flutter_training/stateful_widget/page_view.dart';
 import 'package:flutter_training/stateless_widgets/signup_page.dart';
 import 'package:flutter_training/widget/text_form_field.dart';
 
+import '../widget/text_field.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -68,8 +70,13 @@ class LoginPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-
-        TextField(
+       const AppTextField(
+         hintText :'username',
+       ),
+        const AppTextField(
+            hintText: 'mobile number',
+        ),
+        /*TextField(
           decoration: InputDecoration(
               hintText: 'Username',
               border: OutlineInputBorder(
@@ -91,7 +98,7 @@ class LoginPage extends StatelessWidget {
             prefixIcon: const Icon(Icons.password),
           ),
           obscureText: true,
-        ),
+        ),*/
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {

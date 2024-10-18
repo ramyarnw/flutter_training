@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_training/stateful_widget/color_change.dart';
 import 'package:flutter_training/stateful_widget/form.dart';
+import 'stateful_widget/chat_screen.dart';
 import 'stateful_widget/form_validation.dart';
+import 'stateless_widgets/chat.dart';
 import 'stateless_widgets/colors.dart';
 import 'package:flutter_training/stateless_widgets/login_page.dart';
 import 'package:flutter_training/stateless_widgets/signup_page.dart';
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: TextFormFieldExample(),
+      home: AppChat(),
       debugShowCheckedModeBanner: false,
     );
   }
