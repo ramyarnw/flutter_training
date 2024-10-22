@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_training/stateful_widget/color_change.dart';
 import 'package:flutter_training/stateful_widget/form.dart';
+import 'http_get.dart';
+import 'model/user.dart';
+import 'stateful_widget/apicall.dart';
 import 'stateful_widget/chat_screen.dart';
 import 'stateful_widget/form_validation.dart';
 import 'stateless_widgets/chat.dart';
@@ -40,14 +43,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: AppChat(),
+      home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.Home});
+  const MyHomePage({super.key, });
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -58,13 +61,18 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String Home;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+//fetch data, call fetch album method in init state methods
+  @override
+  void initState() {
+    super.initState();
+
+  }
   int _counter = 0;
 
   void _incrementCounter() {
@@ -94,37 +102,48 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.Home),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Text(
-              'welcome to our page',
-              style: TextStyle(color: Colors.green),
+      body: Column(
+        children: [
+          const Text(
+            'welcome to our page',
+            style: TextStyle(color: Colors.green),
+          ),
+          ElevatedButton(
+            child: const Text(
+              'Login Page',
+              style: TextStyle(color: Colors.blue),
             ),
-            ElevatedButton(
-              child: const Text(
-                "Login Page",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('schedule'),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('duration'),
-            ),
-          ],
-        ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (BuildContext context) => const LoginPage()),
+              );
+            },
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('schedule'),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('duration'),
+          ),
+
+          FutureBuilder<User>(
+            future: ApiCall().fetchUser(),
+            builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data!.toString());
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+
+              // By default, show a loading spinner.
+              return const CircularProgressIndicator();
+            },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
