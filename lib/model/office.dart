@@ -1,11 +1,11 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:flutter_training/model/serializers.dart';
+import 'serializers.dart';
 part 'office.g.dart';
 abstract class Office implements Built<Office,OfficeBuilder> {
-  Office._();
 
   factory Office([void Function(OfficeBuilder) updates]) = _$Office;
+  Office._();
 
   Map<String, dynamic> toJson() {
     return serializers.serializeWith(Office.serializer, this)! as Map<String,dynamic>;

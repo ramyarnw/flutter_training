@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/stateful_widget/color_change.dart';
-import 'package:flutter_training/stateful_widget/form.dart';
-import 'http_get.dart';
+
+import 'innherit_widget/navigation_screen.dart';
 import 'model/user.dart';
-import 'stateful_widget/apicall.dart';
-import 'stateful_widget/chat_screen.dart';
-import 'stateful_widget/form_validation.dart';
-import 'stateless_widgets/chat.dart';
-import 'stateless_widgets/colors.dart';
-import 'package:flutter_training/stateless_widgets/login_page.dart';
-import 'package:flutter_training/stateless_widgets/signup_page.dart';
-import 'package:flutter_training/stateless_widgets/user_details.dart';
+import 'stateful_widget/api_call.dart';
+import 'stateless_widgets/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,14 +36,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const MyNavigation(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, });
+  const MyHomePage({
+    super.key,
+  });
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -61,7 +56,6 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -71,9 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
   }
+
   int _counter = 0;
+  final ApiCall apiCall = ApiCall();//reduce space allocation
 
   void _incrementCounter() {
     setState(() {
@@ -104,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
       ),
       body: Column(
-        children: [
+        children: <Widget>[
           const Text(
             'welcome to our page',
             style: TextStyle(color: Colors.green),
@@ -117,7 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (BuildContext context) => const LoginPage()),
+                MaterialPageRoute(
+                    builder: (BuildContext context) => const LoginPage()),
               );
             },
           ),
@@ -130,8 +126,14 @@ class _MyHomePageState extends State<MyHomePage> {
             child: const Text('duration'),
           ),
 
+          Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(8),
+            child: buildColumn(),
+
+          ),
           FutureBuilder<User>(
-            future: ApiCall().fetchUser(),
+            future: apiCall.fetchUser(),
             builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
               if (snapshot.hasData) {
                 return Text(snapshot.data!.toString());
@@ -150,6 +152,23 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Column buildColumn() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+
+        ElevatedButton(
+          onPressed: () {
+            setState(() async {
+              await apiCall.createUser();
+            });
+          },
+          child: const Text('Create Data'),
+        ),
+      ],
     );
   }
 }

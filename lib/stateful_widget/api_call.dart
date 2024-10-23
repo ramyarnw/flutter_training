@@ -1,15 +1,23 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/user.dart';
 import '../model/user_address.dart';
 
+extension on String {   //extension method
+  Uri toUri() => Uri.parse(this);
+}
+/*extension on String {
+  String defaultHeader() => headers;
+}*/
+
+
+
 class ApiCall {
   Future<User> fetchUser() async {
-    final http.Response response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/users/1'));
+    final http.Response response =
+        await http.get('https://jsonplaceholder.typicode.com/users/1'.toUri());
 //convert http response to album class
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -23,42 +31,33 @@ class ApiCall {
 
   Future<void> deleteUser(int id) async {
     final http.Response response = await http.delete(
-      Uri.parse('https://jsonplaceholder.typicode.com/user/$id'),
+      'https://jsonplaceholder.typicode.com/user/$id'.toUri(),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    if (response.statusCode == 200)
+    if (response.statusCode == 200) {
       return;
+    }
     throw Exception('Failed to delete User');
-
   }
 
-  Future<http.Response> createUser(String title) {
-    User user =  User((b) => b   //initialize
-      ..id =1
-      ..name = 'ram'
-      ..username ='ramya'
-      ..email = 'ramya@gmail.com'
-      ..address=UserAddress((a)=>a..city='aram'..street='aram street'..pincode=123456).toBuilder(),
+  Future<void> createUser() {
+    final User user = User(
+      (UserBuilder b) => b //initialize
+        ..id = 1
+        ..name = 'ram'
+        ..username = 'ramya'
+        ..email = 'ramya@gmail.com'
+        ..address = UserAddress(
+          (UserAddressBuilder a) => a
+            ..city = 'aram'
+            ..street = 'aram street'
+            ..pincode = 123456,
+        ).toBuilder(),
     );
     return http.post(
-      Uri.parse('https://jsonplaceholder.typicode.com/user'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(user
-
-      ),
-    );
-  }
-
-  Future<http.Response> updateUser(String title) async{
-     var user= await fetchUser();
-    user = user.rebuild((c) => c.name = "siva");
-
-    return http.put(
-      Uri.parse('https://jsonplaceholder.typicode.com/user/1'),
+      'https://jsonplaceholder.typicode.com/user'.toUri(),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -66,4 +65,16 @@ class ApiCall {
     );
   }
 
+  Future<http.Response> updateUser(String title) async {
+    User user = await fetchUser();
+    user = user.rebuild((UserBuilder c) => c.name = 'siva');
+
+    return http.put(
+      'https://jsonplaceholder.typicode.com/user/1'.toUri(),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(user),
+    );
+  }
 }
