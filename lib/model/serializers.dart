@@ -3,6 +3,7 @@ library serializers;
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 
+import '../app_provider/user_provider.dart';
 import 'office.dart';
 import 'person.dart';
 import 'user.dart';
@@ -18,6 +19,7 @@ part 'serializers.g.dart';
   Person,
   User,
   UserAddress,
+ UserProvider,
  // AppState,
   //ApiError,
 ])

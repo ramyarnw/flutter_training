@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart' show StateNotifierProvider;
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
-import 'innherit_widget/navigation_screen.dart';
+import 'app_provider/counter.dart';
+import 'app_provider/counter_provider.dart';
+import 'app_provider/user_provider.dart';
 import 'model/user.dart';
 import 'stateful_widget/api_call.dart';
 import 'stateless_widgets/login_page.dart';
 
+
 void main() {
-  runApp(const MyApp());
+
+  runApp(StateNotifierProvider<Counter,UserProvider>(create: (_) => Counter(), child: const MyApp()));
+
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +21,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build( BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -36,7 +43,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyNavigation(),
+      home: const CounterApp(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -68,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   int _counter = 0;
-  final ApiCall apiCall = ApiCall();//reduce space allocation
+  final ApiCall apiCall = ApiCall(); //reduce space allocation
 
   void _incrementCounter() {
     setState(() {
@@ -112,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                MaterialPageRoute<dynamic>(
                     builder: (BuildContext context) => const LoginPage()),
               );
             },
@@ -125,12 +132,10 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {},
             child: const Text('duration'),
           ),
-
           Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8),
             child: buildColumn(),
-
           ),
           FutureBuilder<User>(
             future: apiCall.fetchUser(),
@@ -159,7 +164,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-
         ElevatedButton(
           onPressed: () {
             setState(() async {

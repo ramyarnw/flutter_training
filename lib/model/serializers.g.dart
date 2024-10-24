@@ -10,7 +10,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Office.serializer)
       ..add(Person.serializer)
       ..add(User.serializer)
-      ..add(UserAddress.serializer))
+      ..add(UserAddress.serializer)
+      ..add(UserProvider.serializer))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

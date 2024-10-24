@@ -8,9 +8,10 @@ import '../model/user_address.dart';
 extension on String {   //extension method
   Uri toUri() => Uri.parse(this);
 }
-/*extension on String {
-  String defaultHeader() => headers;
-}*/
+// get read =>read<Counter>();
+// read// /*extension on String {
+//   String defaultHeader() => headers;
+// }*/
 
 
 
